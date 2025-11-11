@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "Multi-Agent System API",
+    "description": "基于 Spring Boot 3.4 + Azure OpenAI 的多智能体系统 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Agent Tasks",
+      "item": [
+        {
+          "name": "Execute Agent Task (Stream)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"查询并分析最近的技术文档，总结主要内容\",\n  \"role\": \"RESEARCHER\",\n  \"context\": {\n    \"source\": \"knowledge_base\"\n  },\n  \"availableTools\": [\"search\", \"cache\"],\n  \"maxIterations\": 10,\n  \"stream\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/agent/execute/stream",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "execute", "stream"]
+            }
+          }
+        },
+        {
+          "name": "Get Task Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/agent/task/:taskId",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "task", ":taskId"],
+              "variable": [
+                {
+                  "key": "taskId",
+                  "value": "uuid-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/agent/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Examples",
+      "item": [
+        {
+          "name": "Coordinator Agent - Task Planning",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"制定一个完整的项目开发计划，包括需求分析、技术选型、开发阶段和测试部署\",\n  \"role\": \"COORDINATOR\",\n  \"availableTools\": [\"search\", \"cache\"],\n  \"maxIterations\": 15,\n  \"stream\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/agent/execute/stream",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "execute", "stream"]
+            }
+          }
+        },
+        {
+          "name": "Researcher Agent - Information Retrieval",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"研究 Spring Boot 3.4 的新特性，并整理成技术文档\",\n  \"role\": \"RESEARCHER\",\n  \"availableTools\": [\"search\", \"cache\"],\n  \"maxIterations\": 10,\n  \"stream\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/agent/execute/stream",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "execute", "stream"]
+            }
+          }
+        },
+        {
+          "name": "Executor Agent - Task Execution",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"将指定数据存储到缓存中，设置过期时间为1小时\",\n  \"role\": \"EXECUTOR\",\n  \"context\": {\n    \"key\": \"user:profile:123\",\n    \"value\": {\"name\": \"张三\", \"age\": 30}\n  },\n  \"availableTools\": [\"cache\"],\n  \"maxIterations\": 5,\n  \"stream\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/agent/execute/stream",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "agent", "execute", "stream"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
