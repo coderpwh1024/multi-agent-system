@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Multi-Agent System
 
 基于 Spring Boot 3.4 + Azure OpenAI 的多智能体系统，采用 Anthropic 的 Building Effective Agents 模式。
@@ -311,6 +310,4 @@ MIT License
 ## 作者
 
 coderpwh - 2025-10-22
-=======
 # multi-agent-system
->>>>>>> 7faddce17efc1708d9ade905bcbac38733f580e1
