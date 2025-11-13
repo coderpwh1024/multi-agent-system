@@ -1,5 +1,7 @@
 package com.example.agent.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -52,5 +54,20 @@ public enum AgentRole {
      * 角色描述
      */
     private final String description;
+
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.name();
+    }
+
+    @JsonCreator
+    public static AgentRole fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        return AgentRole.valueOf(value.toUpperCase());
+    }
 
 }

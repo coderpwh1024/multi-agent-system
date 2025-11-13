@@ -1,6 +1,7 @@
 package com.example.agent.model.dto;
 
 import com.example.agent.enums.AgentRole;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class AgentTaskRequest {
     /**
      * Agent角色
      */
+    @JsonAlias({"role", "Role"})
     private AgentRole role;
 
     /**
